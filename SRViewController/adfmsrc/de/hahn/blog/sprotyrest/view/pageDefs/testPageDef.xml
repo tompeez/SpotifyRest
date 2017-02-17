@@ -10,7 +10,7 @@
                     BeanClass="de.hahn.blog.sprotyrest.model.rest.SpotifyRest.search_Data_tracks" id="searchIterator"/>
     <accessorIterator MasterBinding="searchIterator" Binds="items" RangeSize="25" DataControl="SpotifyRest"
                       BeanClass="de.hahn.blog.sprotyrest.model.rest.SpotifyRest.search_Data_tracks_items"
-                      id="itemsIterator"/>
+                      id="itemsIterator" RefreshCondition="#{not empty bindings.q.inputValue}" Refresh="ifNeeded"/>
   </executables>
   <bindings>
     <tree IterBinding="itemsIterator" id="items">
@@ -24,6 +24,7 @@
         </AttrNames>
         <Accessors>
           <Item Value="album"/>
+          <Item Value="artists"/>
         </Accessors>
       </nodeDefinition>
       <nodeDefinition DefName="de.hahn.blog.sprotyrest.model.rest.SpotifyRest.search_Data_tracks_items_album">
@@ -31,6 +32,12 @@
           <Item Value="name"/>
           <Item Value="href"/>
           <Item Value="id"/>
+        </AttrNames>
+      </nodeDefinition>
+      <nodeDefinition DefName="de.hahn.blog.sprotyrest.model.rest.SpotifyRest.search_Data_tracks_items_artists"
+                      Name="items1">
+        <AttrNames>
+          <Item Value="name"/>
         </AttrNames>
       </nodeDefinition>
     </tree>
