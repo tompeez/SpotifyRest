@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="testPageDef" Package="de.hahn.blog.sprotyrest.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Type="java.lang.String" Name="search_q" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="search_type" IsQueriable="false"/>
+    </variableIterator>
+    <methodIterator Binds="search.result" DataControl="SpotifyRest" RangeSize="25"
+                    BeanClass="de.hahn.blog.sprotyrest.model.rest.SpotifyRest.search_Data_tracks" id="searchIterator"/>
+    <accessorIterator MasterBinding="searchIterator" Binds="items" RangeSize="25" DataControl="SpotifyRest"
+                      BeanClass="de.hahn.blog.sprotyrest.model.rest.SpotifyRest.search_Data_tracks_items"
+                      id="itemsIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="itemsIterator" id="items">
+      <nodeDefinition DefName="de.hahn.blog.sprotyrest.model.rest.SpotifyRest.search_Data_tracks_items" Name="items0">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="name"/>
+          <Item Value="track_number"/>
+          <Item Value="href"/>
+          <Item Value="disc_number"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="album"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="de.hahn.blog.sprotyrest.model.rest.SpotifyRest.search_Data_tracks_items_album">
+        <AttrNames>
+          <Item Value="name"/>
+          <Item Value="href"/>
+          <Item Value="id"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="search" RequiresUpdateModel="true" Action="invokeMethod" MethodName="search"
+                  IsViewObjectMethod="false" DataControl="SpotifyRest" InstanceName="data.SpotifyRest"
+                  ReturnName="data.SpotifyRest.methodResults.search_SpotifyRest_search_result">
+      <NamedData NDName="q" NDType="java.lang.String" NDValue="${bindings.search_q}"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="q">
+      <AttrNames>
+        <Item Value="search_q"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Test2.jsf" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:panelGridLayout id="pgl1">
+                <af:gridRow height="50px" id="gr1">
+                    <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc2">
+                        <af:panelFormLayout id="pfl1" maxColumns="2" rows="1">
+                            <af:inputText value="#{bindings.q.inputValue}" label="Titel"
+                                          required="#{bindings.q.hints.mandatory}"
+                                          columns="#{bindings.q.hints.displayWidth}"
+                                          maximumLength="#{bindings.q.hints.precision}"
+                                          shortDesc="#{bindings.q.hints.tooltip}" id="it1">
+                                <f:validator binding="#{bindings.q.validator}"/>
+                            </af:inputText>
+                            <af:button actionListener="#{bindings.search.execute}" text="search"
+                                       disabled="#{!bindings.search.enabled}" id="b1"/>
+                        </af:panelFormLayout>
+                        <!-- Header -->
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow height="100%" id="gr2">
+                    <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                        <!-- Content -->
+                        <af:table value="#{bindings.items.collectionModel}" var="row" rows="#{bindings.items.rangeSize}"
+                                  emptyText="#{bindings.items.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0" selectedRowKeys="#{bindings.items.collectionModel.selectedRow}"
+                                  rowSelection="multiple" fetchSize="#{bindings.items.rangeSize}" id="t1">
+                            <af:column sortProperty="#{bindings.items.hints.id.name}" sortable="true"
+                                       headerText="#{bindings.items.hints.id.label}" id="c1">
+                                <af:inputText value="#{row.bindings.id.inputValue}"
+                                              label="#{bindings.items.hints.id.label}"
+                                              required="#{bindings.items.hints.id.mandatory}"
+                                              columns="#{bindings.items.hints.id.displayWidth}"
+                                              maximumLength="#{bindings.items.hints.id.precision}"
+                                              shortDesc="#{bindings.items.hints.id.tooltip}" id="it2">
+                                    <f:validator binding="#{row.bindings.id.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.items.hints.name.name}" sortable="true"
+                                       headerText="#{bindings.items.hints.name.label}" id="c2">
+                                <af:inputText value="#{row.bindings.name.inputValue}"
+                                              label="#{bindings.items.hints.name.label}"
+                                              required="#{bindings.items.hints.name.mandatory}"
+                                              columns="#{bindings.items.hints.name.displayWidth}"
+                                              maximumLength="#{bindings.items.hints.name.precision}"
+                                              shortDesc="#{bindings.items.hints.name.tooltip}" id="it3">
+                                    <f:validator binding="#{row.bindings.name.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.items.hints.track_number.name}" sortable="true"
+                                       headerText="#{bindings.items.hints.track_number.label}" id="c3">
+                                <af:inputText value="#{row.bindings.track_number.inputValue}"
+                                              label="#{bindings.items.hints.track_number.label}"
+                                              required="#{bindings.items.hints.track_number.mandatory}"
+                                              columns="#{bindings.items.hints.track_number.displayWidth}"
+                                              maximumLength="#{bindings.items.hints.track_number.precision}"
+                                              shortDesc="#{bindings.items.hints.track_number.tooltip}" id="it4">
+                                    <f:validator binding="#{row.bindings.track_number.validator}"/>
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.items.hints.track_number.format}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.items.hints.album.name.name}" sortable="true"
+                                       headerText="#{bindings.items.hints.album.name.label}" id="c4">
+                                <af:inputText value="#{row.album.bindings.name.inputValue}"
+                                              label="#{bindings.items.hints.album.name.label}"
+                                              required="#{bindings.items.hints.album.name.mandatory}"
+                                              columns="#{bindings.items.hints.album.name.displayWidth}"
+                                              maximumLength="#{bindings.items.hints.album.name.precision}"
+                                              shortDesc="#{bindings.items.hints.album.name.tooltip}"
+                                              rendered="#{row.album != null}" id="it5">
+                                    <f:validator binding="#{row.album.bindings.name.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.items.hints.disc_number.name}" sortable="false"
+                                       headerText="Atrists" id="c5">
+                                <af:iterator id="itr1" value="#{row.artists}" var="artist" varStatus="xxx">
+                                    <af:panelGroupLayout id="pgl2" layout="vertical">
+                                        <af:outputText value="#{artist.name}" id="ot1"/>
+                                    </af:panelGroupLayout>
+                                </af:iterator>
+                            </af:column>
+                        </af:table>
+                    </af:gridCell>
+                </af:gridRow>
+            </af:panelGridLayout>
+        </af:form>
+    </af:document>
+</f:view>

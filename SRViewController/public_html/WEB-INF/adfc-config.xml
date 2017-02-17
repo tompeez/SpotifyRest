@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="index">
+    <page>/index.jsf</page>
+  </view>
+  <view id="test">
+    <page>/test.jsf</page>
+  </view>
+  <view id="Test2">
+    <page>/Test2.jsf</page>
+  </view>
+  <managed-bean id="__1">
+    <managed-bean-name>SpotifySearchBean</managed-bean-name>
+    <managed-bean-class>de.hahn.blog.sprotyrest.view.SpotifySearchBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

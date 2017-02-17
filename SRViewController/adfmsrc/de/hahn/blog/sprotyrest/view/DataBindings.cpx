@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.0.31" id="DataBindings" SeparateXMLFiles="false"
+             Package="de.hahn.blog.sprotyrest.view" ClientType="Generic">
+  <pageMap>
+    <page path="/test.jsf" usageId="de_hahn_blog_sprotyrest_view_testPageDef"/>
+    <page path="/Test2.jsf" usageId="de_hahn_blog_sprotyrest_view_Test2PageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="de_hahn_blog_sprotyrest_view_testPageDef" path="de.hahn.blog.sprotyrest.view.pageDefs.testPageDef"/>
+    <page id="de_hahn_blog_sprotyrest_view_Test2PageDef" path="de.hahn.blog.sprotyrest.view.pageDefs.Test2PageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="SpotifyRest" path="de.hahn.blog.sprotyrest.model.rest.SpotifyRest"/>
+  </dataControlUsages>
+</Application>

@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="test.jsf" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:panelGridLayout id="pgl1">
+                <af:gridRow height="50px" id="gr1">
+                    <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                        <!-- Header -->
+                        <af:panelFormLayout id="pfl1" rows="1" maxColumns="2">
+                            <af:inputText value="#{bindings.q.inputValue}" label="Titel"
+                                          required="#{bindings.q.hints.mandatory}"
+                                          columns="#{bindings.q.hints.displayWidth}"
+                                          maximumLength="#{bindings.q.hints.precision}"
+                                          shortDesc="#{bindings.q.hints.tooltip}" id="it1">
+                                <f:validator binding="#{bindings.q.validator}"/>
+                            </af:inputText>
+                            <af:button actionListener="#{bindings.search.execute}" text="search"
+                                       disabled="#{!bindings.search.enabled}" id="b1"/>
+                        </af:panelFormLayout>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow height="100%" id="gr2">
+                    <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc2">
+                        <!-- Content -->
+                        <af:table value="#{bindings.items.collectionModel}" var="row" rows="#{bindings.items.rangeSize}"
+                                  emptyText="#{bindings.items.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0" selectedRowKeys="#{bindings.items.collectionModel.selectedRow}"
+                                  rowSelection="multiple" fetchSize="#{bindings.items.rangeSize}" id="t1">
+                            <af:column headerText="#{bindings.items.hints.id.label}" id="c1">
+                                <af:outputText value="#{row.id}" shortDesc="#{bindings.items.hints.id.tooltip}"
+                                               id="ot1"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.items.hints.name.label}" id="c2">
+                                <af:outputText value="#{row.name}" shortDesc="#{bindings.items.hints.name.tooltip}"
+                                               id="ot2"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.items.hints.track_number.label}" id="c3">
+                                <af:outputText value="#{row.track_number}"
+                                               shortDesc="#{bindings.items.hints.track_number.tooltip}" id="ot3">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.items.hints.track_number.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.items.hints.href.label}" id="c4">
+                                <af:outputText value="#{row.href}" shortDesc="#{bindings.items.hints.href.tooltip}"
+                                               id="ot4"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.items.hints.album.name.label}" id="c5">
+                                <af:outputText value="#{row.album.bindings.name.inputValue}"
+                                               shortDesc="#{bindings.items.hints.album.name.tooltip}"
+                                               rendered="#{row.album != null}" id="ot5"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.items.hints.album.href.label}" id="c6">
+                                <af:outputText value="#{row.album.bindings.href.inputValue}"
+                                               shortDesc="#{bindings.items.hints.album.href.tooltip}"
+                                               rendered="#{row.album != null}" id="ot6"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.items.hints.album.id.label}" id="c7">
+                                <af:outputText value="#{row.album.bindings.id.inputValue}"
+                                               shortDesc="#{bindings.items.hints.album.id.tooltip}"
+                                               rendered="#{row.album != null}" id="ot7"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.items.hints.disc_number.label}" id="c8">
+                                <af:outputText value="#{row.disc_number}"
+                                               shortDesc="#{bindings.items.hints.disc_number.tooltip}" id="ot8">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.items.hints.disc_number.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="Artist" id="c9">
+                                <af:iterator id="itr1" value="#{row.artists}" var="artist" varStatus="xxx">
+                                <af:panelGroupLayout id="pgl2">
+                                    <af:outputText value="#{artist.name}" id="ot9"></af:outputText>
+                                    <af:outputText id="ot11" value=", "
+                                                   visible="#{xxx.count lt xxx.model.estimatedRowCount}"></af:outputText>
+                                    </af:panelGroupLayout>
+                                </af:iterator>
+                            </af:column>
+                        </af:table>
+                    </af:gridCell>
+                </af:gridRow>
+            </af:panelGridLayout>
+        </af:form>
+    </af:document>
+</f:view>

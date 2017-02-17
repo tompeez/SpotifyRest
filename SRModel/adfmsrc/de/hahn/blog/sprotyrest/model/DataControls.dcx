@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DataControlConfigs xmlns="http://xmlns.oracle.com/adfm/configuration" version="12.2.1.0.31" id="DataControls"
+                    Package="de.hahn.blog.sprotyrest.model">
+  <AdapterDataControl id="SpotifyREST" FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.rest.RestURLDCDefinition" SupportsTransactions="false"
+                      SupportsSortCollection="false" SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="false"
+                      Definition="de.hahn.blog.sprotyrest.model.SpotifyREST"
+                      BeanClass="de.hahn.blog.sprotyrest.model.SpotifyREST"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <Source>
+      <Definitions>
+        <Definition xmlns="http://xmlns.oracle.com/adfm/adapter/rest/json" ConnectionName="SpotifyREST"
+                    Source="/v1/search?q=##q##&amp;type=##type##" HttpMethod="GET" id="search" MethodRef="JSON"
+                    SchemaLocation="SpotifyREST_search_response_schema.json" ensureKeyAttribute="true"
+                    dcStructureVersion="2" RootElement="tracks">
+          <Parameters>
+            <Parameter Name="q" Value=""/>
+            <Parameter Name="type" Value=""/>
+          </Parameters>
+        </Definition>
+      </Definitions>
+    </Source>
+  </AdapterDataControl>
+</DataControlConfigs>
