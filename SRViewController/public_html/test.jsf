@@ -10,9 +10,9 @@
                         <!-- Header -->
                         <af:panelFormLayout id="pfl1" rows="1" maxColumns="2">
                             <af:inputText value="#{bindings.q.inputValue}" label="Titel"
-                                          required="#{bindings.q.hints.mandatory}"
+                                          required="true"
                                           columns="#{bindings.q.hints.displayWidth}"
-                                          maximumLength="#{bindings.q.hints.precision}"
+                                          maximumLength="#{bindings.q.hints.precision}" autoSubmit="true"
                                           shortDesc="#{bindings.q.hints.tooltip}" id="it1">
                                 <f:validator binding="#{bindings.q.validator}"/>
                             </af:inputText>
@@ -27,7 +27,8 @@
                         <af:table value="#{bindings.items.collectionModel}" var="row" rows="#{bindings.items.rangeSize}"
                                   emptyText="#{bindings.items.viewable ? 'No data to display.' : 'Access Denied.'}"
                                   rowBandingInterval="0" selectedRowKeys="#{bindings.items.collectionModel.selectedRow}"
-                                  rowSelection="multiple" fetchSize="#{bindings.items.rangeSize}" id="t1">
+                                  rowSelection="multiple" fetchSize="#{bindings.items.rangeSize}" id="t1"
+                                  partialTriggers="::b1">
                             <af:column headerText="#{bindings.items.hints.id.label}" id="c1">
                                 <af:outputText value="#{row.id}" shortDesc="#{bindings.items.hints.id.tooltip}"
                                                id="ot1"/>
